@@ -7,6 +7,7 @@ unless RUBY_VERSION =~ /^1\.8\./
   end
 end
 
+ENV['FIGROLL_ENV'] = 'test'
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 MOCK_PATH = File.expand_path('../../mock', __FILE__)
 require 'figroll'
