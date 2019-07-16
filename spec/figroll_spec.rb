@@ -91,4 +91,17 @@ describe Figroll do
     end
   end
 
+  describe '.fetch' do
+    let(:key) {:whatever}
+    let(:value) {'yassss'}
+
+    let(:fetch) {described_class.fetch(key)}
+
+    it 'forwards the call to a storage object' do
+      expect(storage).to receive(:fetch).with(key).and_return(value)
+
+      expect(fetch).to eql(value)
+    end
+  end
+
 end
