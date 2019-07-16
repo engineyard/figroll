@@ -4,8 +4,10 @@ services:
   dev:
     build:
       context: .
-      dockerfile: Dockerfile.devtest
+      dockerfile: Dockerfile
     command: /bin/bash
+    environment:
+      FIGROLL_ENV: test
     volumes:
       - .:/app
     ports:
