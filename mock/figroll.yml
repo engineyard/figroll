@@ -1,0 +1,6 @@
+#required:
+  #- SAUSAGES
+
+#environments:
+  #staging:
+    #SAUSAGES: gold
