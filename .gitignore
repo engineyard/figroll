@@ -1,0 +1,9 @@
+/Gemfile.lock
+pkg
+.bundle
+*.gem
+spec-*/fixtures/gitrepo
+/coverage
+*~
+*.swp
+/spec
