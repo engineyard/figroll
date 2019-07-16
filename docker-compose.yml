@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/bash
+    environment:
+      FIGROLL_ENV: test
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+
