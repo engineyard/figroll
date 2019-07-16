@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rake", "~> 10.4"
   gem.add_development_dependency 'rspec', '~> 2.14'
   gem.add_development_dependency 'simplecov'
+  gem.add_development_dependency 'json', '<2'
 
   gem.files      = `git ls-files`.split($\)
   gem.files.reject! {|file| ['Dockerfile', 'docker-compose.yml'].include?(file)}
