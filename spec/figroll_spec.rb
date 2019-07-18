@@ -63,9 +63,24 @@ describe Figroll do
         end
 
         it 'raises an error' do
-          expect {load_file}.to raise_error
+          expect {load_file}.to raise_error("Required variables not set: SAUSAGES")
         end
       end
+
+      context 'multiple missing required variables' do
+        let(:filename) {'multireqs.yml'}
+
+        before(:each) do
+          ENV.delete('SAUSAGES')
+          ENV.delete('GOLDERBLATS')
+        end
+
+        it 'raises an error' do
+          expect {load_file}.to raise_error("Required variables not set: GOLDERBLATS, SAUSAGES")
+        end
+
+      end
+
 
       context 'and they are all present' do
         before(:each) do
@@ -89,6 +104,7 @@ describe Figroll do
         expect(load_file).to eql(nil)
       end
     end
+
   end
 
   describe '.fetch' do

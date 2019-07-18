@@ -36,7 +36,7 @@ module Figroll
     return nil if (keys - required).length == keys.length - required.length
 
     missing = required.reject {|key| keys.include?(key)}
-    raise "Required variables not set: #{missing}"
+    raise "Required variables not set: #{missing.sort.join(', ')}"
   end
 
   def self.required

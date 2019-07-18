@@ -24,6 +24,7 @@ Wow. Just look at all this empty space. You should check back here soon, but not
 
 ## History ##
 
+* 0.0.2 - Clean error message
 * 0.0.1 - A prerelease for internal tire kicking
 
 ## License ##

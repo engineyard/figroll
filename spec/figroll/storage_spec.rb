@@ -6,10 +6,10 @@ describe Figroll::Storage do
   describe '#fetch' do
     let(:data) {
       {
-        'one' => 'two',
-        'two' => 'three',
+        'two' => 'one',
+        'one' => 'three',
         'i like good' => 'ruby',
-        'and' => 'I like good memes'
+        'and' => 'I like dumb memes'
       }
     }
 
