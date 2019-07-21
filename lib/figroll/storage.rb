@@ -1,3 +1,5 @@
+require 'figroll/util'
+
 module Figroll
   class Storage
     attr_reader :vars
@@ -7,12 +9,12 @@ module Figroll
     end
 
     def fetch(key)
-      @vars.fetch(Figroll.normalize(key))
+      @vars.fetch(Util.normalize(key))
     end
 
     def import(incoming)
       incoming.keys.each do |key|
-        vars[Figroll.normalize(key)] = incoming[key]
+        vars[Util.normalize(key)] = incoming[key]
       end
 
       nil

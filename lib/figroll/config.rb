@@ -1,4 +1,5 @@
 require 'yaml'
+require 'figroll/util'
 
 module Figroll
   class Config
@@ -16,7 +17,7 @@ module Figroll
       # set up required keys
       file_data['required'] ||= []
       file_data['required'].each do |key|
-        required.push(Figroll.normalize(key))
+        required.push(Util.normalize(key))
       end
 
       # load up the environment-specific data

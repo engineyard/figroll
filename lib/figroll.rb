@@ -1,8 +1,12 @@
 require 'figroll/config'
 require 'figroll/storage'
 
+# A simple universal ENV-focused configuration library
 module Figroll
-  def self.load_file(config_file)
+
+  # Given a config file, set up Figroll for ENV consumption
+  # @param config_file [String] the figroll configuration for your app
+  def self.configure(config_file)
     setup
 
     # Load the config file
@@ -18,45 +22,50 @@ module Figroll
     validate_configuration
   end
 
+  # Retrieve the value of an environment configuration variable. The key may be
+  # either a String or a Symbol, non-case-sensitive. For example, these all
+  # reference the same value: `'i am a variable'`, `'i_am_a_variable'`,
+  # `'I_AM_A_VARIABLE'`, `:i_am_a_variable`
+  # @param key [String, Symbol] the stringified or symbolized name of the
+  #   variable for which you want to know the value.
   def self.fetch(key)
     storage.fetch(key)
   end
 
-  def self.storage
-    @storage
-  end
+  class << self
+    private
 
-  def self.config
-    @config
-  end
+    def storage
+      @storage
+    end
 
-  
-  def self.validate_configuration
-    return nil if required.length == 0
-    return nil if (keys - required).length == keys.length - required.length
+    def config
+      @config
+    end
 
-    missing = required.reject {|key| keys.include?(key)}
-    raise "Required variables not set: #{missing.sort.join(', ')}"
-  end
+    def validate_configuration
+      return nil if required.length == 0
+      return nil if (keys - required).length == keys.length - required.length
 
-  def self.required
-    config.required
-  end
+      missing = required.reject {|key| keys.include?(key)}
+      raise "Required variables not set: #{missing.sort.join(', ')}"
+    end
 
-  def self.keys
-    storage.keys
-  end
+    def required
+      config.required
+    end
 
-  def self.environment
-    config.environment
-  end
+    def keys
+      storage.keys
+    end
 
-  def self.normalize(key)
-    key.to_s.upcase.gsub(/\s+/, '_')
-  end
+    def environment
+      config.environment
+    end
 
-  def self.setup
-    @config = Config.new
-    @storage = Storage.new
+    def setup
+      @config = Config.new
+      @storage = Storage.new
+    end
   end
 end
