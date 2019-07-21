@@ -24,10 +24,15 @@ module Figroll
 
   # Retrieve the value of an environment configuration variable. The key may be
   # either a String or a Symbol, non-case-sensitive. For example, these all
-  # reference the same value: `'i am a variable'`, `'i_am_a_variable'`,
-  # `'I_AM_A_VARIABLE'`, `:i_am_a_variable`
+  # reference the same value:
+  # * 'i am a variable'
+  # * 'i_am_a_variable'
+  # * 'I_AM_A_VARIABLE'
+  # * :i_am_a_variable
   # @param key [String, Symbol] the stringified or symbolized name of the
   #   variable for which you want to know the value.
+  # @return [String] the value of the variable when Figroll was configured
+  # @raise [RuntimeError] if the varible was not known at configuration time
   def self.fetch(key)
     storage.fetch(key)
   end
