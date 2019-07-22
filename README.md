@@ -2,6 +2,12 @@
 
 Figroll is a somewhat simple gem to ease your way into the use of environment variables for configuration. It is not tied to any specific framework, so you can use it just about anywhere.
 
+Fetching information via Figroll works roughly like this:
+
+* If `ENV` contains the variable that you want to use, Figroll provides the data from `ENV`
+* If the varible you want to use is not in `ENV`, Figroll falls back to data provided in a YAML config file.
+* If the variable you want to use is missing from both `ENV` and the config file, Figroll raises an error.
+
 ## Installation ##
 
 Add this line to your application's Gemfile:
@@ -62,7 +68,7 @@ environments:
     REQUIRED_VARIABLE_2: staging 2
 ```
 
-***Note: To point out a best practice, you can see that we don't define a "production" environment. While we won't stop you from doing so, we believe that this is a bad practice that runs orthogonal to the direction of ENV-focused configuration, so we advise that you don't do this.***
+***Best Practice: Use Figroll in production, but do not store a "production" environment in your Figroll config file. Instead, define the variables in production's execution environment.***
 
 #### Required Variables ####
 
@@ -88,7 +94,7 @@ On the other hand, if `FIGROLL_ENV` is set to `staging` and `REQUIRED_VARIABLE_1
 
 While it's easy and reasonable to think of Figroll as a proxy to `ENV`, that's not entirely accurate. Figroll only considers variables and values that are known (either in the execution environment or in the config file) at the point in time when `Figroll.configure` is called.
 
-That is, changing an environment variable while an app is running does not affect what is returned when you `Figroll.fetch` that variable.
+**That is, changing an environment variable while an app is running does not affect what is returned when you `Figroll.fetch` that variable.**
 
 ### Consumption ###
 
