@@ -61,7 +61,7 @@ environments:
     REQUIRED_VARIABLE_1: staging 1
     REQUIRED_VARIABLE_2: staging 2
 ```
-"
+
 ***Note: To point out a best practice, you can see that we don't define a "production" environment. While we won't stop you from doing so, we believe that this is a bad practice that runs orthogonal to the direction of ENV-focused configuration, so we advise that you don't do this.***
 
 #### Required Variables ####
