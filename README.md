@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage ##
 
-There are two usage concerns with Figroll: Configuration and Consumption
+There are two aspects of usage with Figroll: Configuration and Consumption
 
 ### Configuration ###
 
