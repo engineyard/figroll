@@ -90,19 +90,19 @@ On the other hand, if `FIGROLL_ENV` is set to `staging` and `REQUIRED_VARIABLE_1
 
 ***tl;dr - Values from the execution environment have precedence over values from the Figroll config file.***
 
-#### Consistency ####
-
-While it's easy and reasonable to think of Figroll as a proxy to `ENV`, that's not entirely accurate. Figroll only considers variables and values that are known (either in the execution environment or in the config file) at the point in time when `Figroll.configure` is called.
-
-**That is, changing an environment variable while an app is running does not affect what is returned when you `Figroll.fetch` that variable.**
-
 ### Consumption ###
 
 One consumes values from Figroll via `Figroll.fetch`, which takes either a symbol or a string as the variable name to fetch. One important consideration is that variable names in Figroll are not case-sensitive. That is, `var1` is the same as both `Var1` and `VAR1`.
 
 If you should call `Figroll.fetch` for a variable that was not known when `Figroll.configure` was called, a `RuntimeError` is raised. Otherwise, if we can resolve the requested variable name to a known variable, the value of that variable is returned.
 
-As mentioned above, Figroll does not proxy calls back to `ENV`, and it also does not modify the entries in `ENV`, so it would be best to avoid retrieving information directly from `ENV`.
+#### Consistency ####
+
+While it's easy and reasonable to think of Figroll as a proxy to `ENV`, that's not entirely accurate. Figroll only considers variables and values that are known (either in the execution environment or in the config file) at the point in time when `Figroll.configure` is called.
+
+**That is, changing an environment variable while an app is running does not affect what is returned when you `Figroll.fetch` that variable.**
+
+To that end, it would be best to avoid retrieving information directly from `ENV`.
 
 ## Similar Projects ##
 
