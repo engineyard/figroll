@@ -61,8 +61,16 @@ environments:
     REQUIRED_VARIABLE_1: staging 1
     REQUIRED_VARIABLE_2: staging 2
 ```
-
+"
 ***Note: To point out a best practice, you can see that we don't define a "production" environment. While we won't stop you from doing so, we believe that this is a bad practice that runs orthogonal to the direction of ENV-focused configuration, so we advise that you don't do this.***
+
+#### Required Variables ####
+
+The "required" section of the config file is used to list out environment variables without which your application absolutely cannot run. A good example of such a beast is `DATABASE_URL` for the great majority of Rails apps, but we suggest making all or most of your variables required.
+
+If a variable listed in this section lacks a value at the time that `Figroll.configure` is run, the configure call raises a runtime error to reflect that missing variable. As mentioned above, it's a good idea to configure Figroll early in your application's boot process, and the specific reasoning behind that is to ensure that if there is missing configuration data, app booting fails as early as possible so you can fix it more quickly.
+
+The "required" section, however, is optional. To that end, if you leave it out, you may end up seeing fun surprises later in your application deployment's lifetime. My go-to example for this is that everything about your app may run seemingly well, but a missing payment gateway API key variable might cause checkouts to inexplicably fail.
 
 #### Variable Precedence ####
 
