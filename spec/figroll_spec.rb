@@ -12,26 +12,25 @@ describe Figroll do
     allow(storage).to receive(:import).and_call_original
   end
 
-  describe '.load_file' do
+  describe '.configure' do
     let(:filename) {'figroll.yml'}
     let(:config_file) {
       File.join(MOCK_PATH, filename)
     }
 
-    let(:load_file) {described_class.load_file(config_file)}
+    let(:configure) {described_class.configure(config_file)}
 
     before(:each) do
       storage.send(:reset)
       config.send(:reset)
     end
 
-    it 'forwards the call to a config object' do
-      expect(described_class.config).to eql(config)
+    it 'loads the config file via a config object' do
       expect(config).
         to receive(:load_file).
         with(config_file)
 
-      load_file
+      configure
     end
 
     context 'when there is an applicable configuration environment' do
@@ -42,7 +41,7 @@ describe Figroll do
           to receive(:import).
           with({'SAUSAGES' => 'gold'})
 
-        load_file
+        configure
       end
     end
 
@@ -51,7 +50,7 @@ describe Figroll do
         to receive(:import).
         with(ENV)
 
-      load_file
+      configure
     end
 
     context 'when there are required variables' do
@@ -63,7 +62,7 @@ describe Figroll do
         end
 
         it 'raises an error' do
-          expect {load_file}.to raise_error("Required variables not set: SAUSAGES")
+          expect {configure}.to raise_error("Required variables not set: SAUSAGES")
         end
       end
 
@@ -76,7 +75,7 @@ describe Figroll do
         end
 
         it 'raises an error' do
-          expect {load_file}.to raise_error("Required variables not set: GOLDERBLATS, SAUSAGES")
+          expect {configure}.to raise_error("Required variables not set: GOLDERBLATS, SAUSAGES")
         end
 
       end
@@ -92,7 +91,7 @@ describe Figroll do
         end
 
         it 'returns nil' do
-          expect(load_file).to eql(nil)
+          expect(configure).to eql(nil)
         end
       end
     end
@@ -101,7 +100,7 @@ describe Figroll do
       let(:filename) {'withoutreqs.yml'}
 
       it 'returns nil' do
-        expect(load_file).to eql(nil)
+        expect(configure).to eql(nil)
       end
     end
 
