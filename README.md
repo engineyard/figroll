@@ -114,6 +114,7 @@ Figroll isn't an entirely new idea at all. In this case, we're standing on the s
 
 ## History ##
 
+* 1.0.0 - Initial public release
 * 0.0.2 - Clean error message
 * 0.0.1 - A prerelease for internal tire kicking
 
